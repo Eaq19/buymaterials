@@ -6,22 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClientDTO {
+public class CityDTO {
 
     private long id;
-    private String documentNumber;
-    private String documentType;
-    private String name;
+    private String description;
     private DepartamentDTO departament;
-    private CityDTO city;
-    private String address;
-    private String phoneNumber;
-    private String picture;
-    private Set<InvoiceHeaderDTO> invoices;
 }

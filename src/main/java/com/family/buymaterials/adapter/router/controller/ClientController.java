@@ -1,54 +1,53 @@
 package com.family.buymaterials.adapter.router.controller;
 
+import com.family.buymaterials.domain.service.ClientServiceInterface;
 import com.family.buymaterials.domain.service.model.ClientDTO;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("clients")
 public class ClientController {
 
-    private List<ClientDTO> clients = new ArrayList<>();
+    @Autowired
+    private ClientServiceInterface clientServiceInterface;
 
-    public ClientController() {
-        clients.add(new ClientDTO(1L, "admin"));
-        clients.add(new ClientDTO(2L, "supervisor"));
-        clients.add(new ClientDTO(3L, "cajero"));
+    // http://localhost:8888/clients (GET)
+    @GetMapping(produces = "application/json")
+    public List<ClientDTO> getClients() {
+        return clientServiceInterface.findAllClients();
     }
 
-    @GetMapping(value = "clients")
-    public ResponseEntity<List<ClientDTO>> findAll(){
-        return ResponseEntity.ok(clients);
+    // http://localhost:8888/clients/1 (GET)
+    @GetMapping(value = "/{id}", produces = "application/json")
+    public ClientDTO getClientById(@PathVariable Long id) {
+        return clientServiceInterface.findClientById(id);
     }
 
-
-    @PutMapping(value = "clients")
-    public ResponseEntity<ClientDTO> update(ClientDTO request){
-        ClientDTO user = clients.stream()
-                .filter(currentUser -> currentUser.getId() == request.getId())
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("No existe el cliente"));
-        user.setName(request.getName());
-        return ResponseEntity.ok(user);
+    // http://localhost:8888/clients/add (ADD)
+    @PostMapping(value = "/add", produces = "application/json")
+    public ClientDTO addClient(ClientDTO customer) {
+        return clientServiceInterface.saveClient(customer);
     }
 
-    @PostMapping(value = "clients")
-    public ResponseEntity<ClientDTO> create(ClientDTO request){
-        clients.add(request);
-        return ResponseEntity.ok(request);
+    // http://localhost:8888/clients/delete/1 (GET)
+    @GetMapping(value = "/delete/{id}", produces = "application/json")
+    public String deleteClient(@PathVariable Long id) {
+        return clientServiceInterface.deleteClient(id);
     }
 
-    @DeleteMapping(value = "clients/{clientId}")
-    public ResponseEntity<?> delete( @PathVariable("clientId") long userId ) {
-        ClientDTO user = clients.stream()
-                .filter(currentUser -> currentUser.getId() == userId)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("No existe el cliente"));
-        clients.remove(user);
-        return ResponseEntity.ok().build();
+    // http://localhost:8888/clients/update (PATCH)
+    @PatchMapping(value = "/update", produces = "application/json")
+    public String updateClient(ClientDTO customerNew) {
+        return clientServiceInterface.updateClient(customerNew);
+    }
 
+    // http://localhost:8888/clients/status (GET)
+    @GetMapping(value = "/status", produces = "application/json")
+    public String status() {
+        return "Status done";
     }
 
 }
