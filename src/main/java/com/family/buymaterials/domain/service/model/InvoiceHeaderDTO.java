@@ -22,7 +22,7 @@ public class InvoiceHeaderDTO {
     private String address;
     private String phone;
     private double total;
-    private Type status;
+    private Type invoiceType;
     private DepartamentDTO headerDepartament;
     private CityDTO headerCity;
     private ClientDTO headerClient;

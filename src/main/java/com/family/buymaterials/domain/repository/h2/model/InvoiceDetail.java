@@ -25,7 +25,6 @@ public class InvoiceDetail {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "invoice_number", nullable = false, updatable = false)
-    @JsonManagedReference
     private InvoiceHeader detailInvoiceHeader;
 
     @ManyToOne(optional = false)

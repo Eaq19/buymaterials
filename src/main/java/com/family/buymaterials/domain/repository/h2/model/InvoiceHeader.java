@@ -50,10 +50,6 @@ public class InvoiceHeader {
     @JoinColumn(name = "invoice_client_code", nullable = false)
     private Client headerClient;
 
-    @OneToMany(mappedBy = "detailInvoiceHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<InvoiceDetail> invoiceDetails;
-
     /*
     @Transient
     private Double invoiceTotal;

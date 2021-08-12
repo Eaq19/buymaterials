@@ -27,8 +27,4 @@ public class Material {
     @Column(name = "material_price", nullable = false)
     private double price;
 
-    @OneToMany(mappedBy = "detailMaterial", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<ProductDetail> productDetail;
-
 }

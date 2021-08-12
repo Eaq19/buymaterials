@@ -31,12 +31,4 @@ public class Product {
     @Column(name = "product_tax", nullable = false)
     private double tax;
 
-    @OneToMany(mappedBy = "detailProduct", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<ProductDetail> productDetail;
-
-    @OneToMany(mappedBy = "invoiceDetailProduct", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<InvoiceDetail> invoiceDetail;
-
 }

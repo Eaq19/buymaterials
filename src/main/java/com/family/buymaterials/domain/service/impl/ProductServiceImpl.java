@@ -1,9 +1,12 @@
 package com.family.buymaterials.domain.service.impl;
 
+import com.family.buymaterials.adapter.router.repository.ProductDetailRepository;
 import com.family.buymaterials.adapter.router.repository.ProductRepository;
 import com.family.buymaterials.domain.repository.h2.model.Product;
+import com.family.buymaterials.domain.repository.h2.model.ProductDetail;
 import com.family.buymaterials.domain.service.ProductServiceInterface;
 import com.family.buymaterials.domain.service.model.ProductDTO;
+import com.family.buymaterials.domain.service.model.ProductDetailDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +15,20 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ProductServiceImpl implements ProductServiceInterface {
 
     private ProductRepository productRepository;
+    private ProductDetailRepository productDetailRepository;
     private ObjectMapper objectMapper;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, ObjectMapper objectMapper) {
+    public ProductServiceImpl(ProductRepository productRepository, ObjectMapper objectMapper, ProductDetailRepository productDetailRepository) {
         this.productRepository = productRepository;
         this.objectMapper = objectMapper;
+        this.productDetailRepository = productDetailRepository;
     }
 
     @Override
@@ -44,6 +50,13 @@ public class ProductServiceImpl implements ProductServiceInterface {
         if (product.isPresent()) {
             productDTO = objectMapper.convertValue(product.get(), new TypeReference<ProductDTO>() {
             });
+            /*
+            Set<ProductDetail> listDetail = productDetailRepository.findByDetailProduct(product.get());
+            if (!listDetail.isEmpty()) {
+                productDTO.setProductDetail(objectMapper.convertValue(listDetail, new TypeReference<Set<ProductDetailDTO>>() {
+                }));
+            }
+             */
         }
         return productDTO;
     }

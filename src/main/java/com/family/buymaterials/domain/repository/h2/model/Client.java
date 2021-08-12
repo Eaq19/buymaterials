@@ -46,8 +46,4 @@ public class Client {
 
     @Column(name = "client_picture", nullable = false)
     private String picture;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "headerClient", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Set<InvoiceHeader> invoices;
 }
