@@ -28,7 +28,7 @@ public class ClientController {
 
     // http://localhost:8888/clients/add (ADD)
     @PostMapping(value = "/add", produces = "application/json")
-    public ClientDTO addClient(ClientDTO customer) {
+    public ClientDTO addClient(@RequestBody ClientDTO customer) {
         return clientServiceInterface.saveClient(customer);
     }
 
@@ -40,7 +40,7 @@ public class ClientController {
 
     // http://localhost:8888/clients/update (PATCH)
     @PatchMapping(value = "/update", produces = "application/json")
-    public String updateClient(ClientDTO customerNew) {
+    public String updateClient(@RequestBody ClientDTO customerNew) {
         return clientServiceInterface.updateClient(customerNew);
     }
 

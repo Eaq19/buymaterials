@@ -1,12 +1,12 @@
 package com.family.buymaterials.domain.service.model;
 
 import com.family.buymaterials.domain.repository.h2.model.Type;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
@@ -14,6 +14,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class InvoiceHeaderDTO {
 
     private long id;
@@ -22,9 +23,9 @@ public class InvoiceHeaderDTO {
     private String phone;
     private double total;
     private Type status;
-    private DepartamentDTO departament;
-    private CityDTO city;
-    private ClientDTO client;
+    private DepartamentDTO headerDepartament;
+    private CityDTO headerCity;
+    private ClientDTO headerClient;
     private Set<InvoiceDetailDTO> invoiceDetails;
 
 }

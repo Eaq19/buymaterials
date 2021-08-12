@@ -1,5 +1,6 @@
 package com.family.buymaterials.domain.repository.h2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,18 +39,19 @@ public class InvoiceHeader {
     private Type status;
 
     @JoinColumn(name = "invoice_departament_code", nullable = false)
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Departament departament;
+    @ManyToOne(optional = false)
+    private Departament headerDepartament;
 
     @JoinColumn(name = "invoice_city_code", nullable = false)
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private City city;
+    @ManyToOne(optional = false)
+    private City headerCity;
 
     @JoinColumn(name = "invoice_client_code", nullable = false)
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Client client;
+    @ManyToOne(optional = false)
+    private Client headerClient;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "invoiceHeader")
+    @OneToMany(mappedBy = "detailInvoiceHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<InvoiceDetail> invoiceDetails;
 
     /*

@@ -19,13 +19,13 @@ public class ProductDetail {
     @Column(name = "product_detail_code")
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "product_code")
-    private Product product;
+    private Product detailProduct;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "material_code")
-    private Material material;
+    private Material detailMaterial;
 
     @Column(name = "material_cant", nullable = false)
     private int materialCant;

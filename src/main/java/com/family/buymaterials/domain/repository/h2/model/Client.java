@@ -1,5 +1,6 @@
 package com.family.buymaterials.domain.repository.h2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,12 +32,12 @@ public class Client {
     private String name;
 
     @JoinColumn(name = "client_departament_code", nullable = false)
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Departament departament;
+    @ManyToOne(optional = false)
+    private Departament clientDepartament;
 
     @JoinColumn(name = "client_city_code", nullable = false)
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private City city;
+    @ManyToOne(optional = false)
+    private City clientCity;
 
     @Column(name = "client_address", nullable = false, length = 70)
     private String address;
@@ -47,6 +48,7 @@ public class Client {
     @Column(name = "client_picture", nullable = false)
     private String picture;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "headerClient", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<InvoiceHeader> invoices;
 }

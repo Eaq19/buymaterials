@@ -1,5 +1,6 @@
 package com.family.buymaterials.domain.repository.h2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,7 +27,8 @@ public class Material {
     @Column(name = "material_price", nullable = false)
     private double price;
 
-    @OneToMany(mappedBy = "material", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "detailMaterial", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<ProductDetail> productDetail;
 
 }

@@ -1,21 +1,21 @@
 package com.family.buymaterials.domain.service.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class InvoiceDetailDTO {
 
     private long id;
-    private InvoiceHeaderDTO invoiceHeader;
-    private ProductDTO product;
+    private InvoiceHeaderDTO detailInvoiceHeader;
+    private ProductDTO invoiceDetailProduct;
     private int productCant;
 
 }

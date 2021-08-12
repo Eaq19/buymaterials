@@ -19,13 +19,13 @@ public class InvoiceDetail {
     @Column(name = "invoice_item_consecutive")
     private long id;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "invoice_number", nullable = false, updatable = false)
-    private InvoiceHeader invoiceHeader;
+    private InvoiceHeader detailInvoiceHeader;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "product_code")
-    private Product product;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "product_code", nullable = false)
+    private Product invoiceDetailProduct;
 
     @Column(name = "product_cant", nullable = false)
     private int productCant;
