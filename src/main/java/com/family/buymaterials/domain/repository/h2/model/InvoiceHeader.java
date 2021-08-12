@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
-@Entity
+@Entity(name = "invoiceheaders")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -36,18 +36,18 @@ public class InvoiceHeader {
 
     @Column(name = "invoice_type", nullable = false, length = 15)
     @Enumerated(value = EnumType.STRING)
-    private Type status;
+    private Type invoiceType;
 
-    @JoinColumn(name = "invoice_departament_code", nullable = false)
     @ManyToOne(optional = false)
+    @JoinColumn(name = "invoice_departament_code", nullable = false)
     private Departament headerDepartament;
 
-    @JoinColumn(name = "invoice_city_code", nullable = false)
     @ManyToOne(optional = false)
+    @JoinColumn(name = "invoice_city_code", nullable = false)
     private City headerCity;
 
-    @JoinColumn(name = "invoice_client_code", nullable = false)
     @ManyToOne(optional = false)
+    @JoinColumn(name = "invoice_client_code", nullable = false)
     private Client headerClient;
 
     @OneToMany(mappedBy = "detailInvoiceHeader", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

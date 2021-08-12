@@ -9,7 +9,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
+@Entity(name = "clients")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -30,12 +30,12 @@ public class Client {
     @Column(name = "client_name", nullable = false, length = 50)
     private String name;
 
-    @JoinColumn(name = "client_departament_code", nullable = false)
     @ManyToOne(optional = false)
+    @JoinColumn(name = "client_departament_code", nullable = false)
     private Departament clientDepartament;
 
-    @JoinColumn(name = "client_city_code", nullable = false)
     @ManyToOne(optional = false)
+    @JoinColumn(name = "client_city_code", nullable = false)
     private City clientCity;
 
     @Column(name = "client_address", nullable = false, length = 70)

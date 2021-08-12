@@ -1,5 +1,6 @@
 package com.family.buymaterials.domain.repository.h2.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +10,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
+@Entity(name = "departaments")
 @Getter
 @Setter
 @NoArgsConstructor
