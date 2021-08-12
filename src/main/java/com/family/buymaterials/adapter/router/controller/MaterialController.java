@@ -28,7 +28,7 @@ public class MaterialController {
 
     // http://localhost:8888/materials/add (ADD)
     @PostMapping(value = "/add", produces = "application/json")
-    public MaterialDTO addMaterial(MaterialDTO material) {
+    public MaterialDTO addMaterial(@RequestBody MaterialDTO material) {
         return materialServiceInterface.saveMaterial(material);
     }
 
@@ -40,7 +40,7 @@ public class MaterialController {
 
     // http://localhost:8888/materials/update (PATCH)
     @PatchMapping(value = "/update", produces = "application/json")
-    public String updateMaterial(MaterialDTO materialNew) {
+    public String updateMaterial(@RequestBody MaterialDTO materialNew) {
         return materialServiceInterface.updateMaterial(materialNew);
     }
 

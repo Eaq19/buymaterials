@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class InvoiceDetail {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "invoice_item_consecutive")
     private long id;
 

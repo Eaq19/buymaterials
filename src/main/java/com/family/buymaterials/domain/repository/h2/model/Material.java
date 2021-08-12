@@ -17,7 +17,7 @@ import java.util.Set;
 public class Material {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "material_code")
     private long id;
 

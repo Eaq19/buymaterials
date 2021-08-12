@@ -28,7 +28,7 @@ public class ProductController {
 
     // http://localhost:8888/products/add (ADD)
     @PostMapping(value = "/add", produces = "application/json")
-    public ProductDTO addProduct(ProductDTO product) {
+    public ProductDTO addProduct(@RequestBody ProductDTO product) {
         return productServiceInterface.saveProduct(product);
     }
 
@@ -40,7 +40,7 @@ public class ProductController {
 
     // http://localhost:8888/products/update (PATCH)
     @PatchMapping(value = "/update", produces = "application/json")
-    public String updateProduct(ProductDTO productNew) {
+    public String updateProduct(@RequestBody ProductDTO productNew) {
         return productServiceInterface.updateProduct(productNew);
     }
 

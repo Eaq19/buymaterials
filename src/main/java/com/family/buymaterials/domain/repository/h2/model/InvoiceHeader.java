@@ -18,7 +18,7 @@ import java.util.Set;
 public class InvoiceHeader {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "invoice_number")
     private long id;
 
@@ -34,7 +34,7 @@ public class InvoiceHeader {
     @Column(name = "invoice_total", nullable = false)
     private double total;
 
-    @Column(name="invoice_type", nullable = false, length = 15)
+    @Column(name = "invoice_type", nullable = false, length = 15)
     @Enumerated(value = EnumType.STRING)
     private Type status;
 

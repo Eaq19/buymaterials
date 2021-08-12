@@ -17,7 +17,7 @@ import java.util.List;
 public class Departament {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "departament_code")
     private long id;
 
