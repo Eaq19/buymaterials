@@ -3,6 +3,8 @@ package com.family.buymaterials.adapter.router.controller;
 import com.family.buymaterials.domain.service.ClientServiceInterface;
 import com.family.buymaterials.domain.service.model.ClientDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,20 +36,34 @@ public class ClientController {
 
     // http://localhost:8888/clients/delete/1 (GET)
     @GetMapping(value = "/delete/{id}", produces = "application/json")
-    public String deleteClient(@PathVariable Long id) {
-        return clientServiceInterface.deleteClient(id);
+    public ResponseEntity<Object> deleteClient(@PathVariable Long id) {
+        if (clientServiceInterface.deleteClient(id).equals("1")) {
+            return new ResponseEntity<Object>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     // http://localhost:8888/clients/update (PATCH)
     @PatchMapping(value = "/update", produces = "application/json")
-    public String updateClient(@RequestBody ClientDTO customerNew) {
-        return clientServiceInterface.updateClient(customerNew);
+    public ResponseEntity<Object> updateClient(@RequestBody ClientDTO customerNew) {
+        if(clientServiceInterface.updateClient(customerNew).equals("1")) {
+            return new ResponseEntity<Object>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     // http://localhost:8888/clients/status (GET)
     @GetMapping(value = "/status", produces = "application/json")
     public String status() {
         return "Status done";
+    }
+
+    // http://localhost:8888/clients/byName/Edison (GET)
+    @GetMapping(value = "/byName/{name}", produces = "application/json")
+    public List<ClientDTO> likeNameClient(@PathVariable String name) {
+        return clientServiceInterface.likeNameClient(name);
     }
 
 }

@@ -9,6 +9,8 @@ public interface ClientServiceInterface {
 
     List<ClientDTO> findAllClients();
 
+    List<ClientDTO> likeNameClient(String name);
+
     ClientDTO findClientById(Long id);
 
     ClientDTO saveClient(ClientDTO clientNew);

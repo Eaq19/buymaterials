@@ -44,6 +44,18 @@ public class ClientServiceImpl implements ClientServiceInterface {
     }
 
     @Override
+    public List<ClientDTO> likeNameClient(String name) {
+        List<ClientDTO> list = new ArrayList<>();
+        List<Client> listClient = clientRepository.findByNameContains(name);
+        if (!listClient.isEmpty()) {
+            list = objectMapper.convertValue(listClient,
+                    new TypeReference<List<ClientDTO>>() {
+                    });
+        }
+        return list;
+    }
+
+    @Override
     public ClientDTO findClientById(Long id) {
         Optional<Client> client = clientRepository.findById(id);
         ClientDTO clientDTO = null;
@@ -77,9 +89,9 @@ public class ClientServiceImpl implements ClientServiceInterface {
     public String deleteClient(Long id) {
         if (clientRepository.findById(id).isPresent()) {
             clientRepository.deleteById(id);
-            return "Cliente eliminado correctamente.";
+            return "1";
         }
-        return "Error! El Cliente no existe";
+        return "0";
     }
 
     @Override
@@ -89,8 +101,8 @@ public class ClientServiceImpl implements ClientServiceInterface {
             Client client = objectMapper.convertValue(clientUpdate, new TypeReference<Client>() {
             });
             clientRepository.save(client);
-            return "Cliente modificado";
+            return "1";
         }
-        return "Error al modificar el Cliente";
+        return "0";
     }
 }

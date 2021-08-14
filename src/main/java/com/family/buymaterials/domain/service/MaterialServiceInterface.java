@@ -8,6 +8,8 @@ public interface MaterialServiceInterface {
 
     List<MaterialDTO> findAllMaterials();
 
+    List<MaterialDTO> likeNameMaterial(String name);
+
     MaterialDTO findMaterialById(Long id);
 
     MaterialDTO saveMaterial(MaterialDTO materialNew);

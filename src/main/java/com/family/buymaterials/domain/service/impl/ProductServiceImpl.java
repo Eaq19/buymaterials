@@ -3,10 +3,8 @@ package com.family.buymaterials.domain.service.impl;
 import com.family.buymaterials.adapter.router.repository.ProductDetailRepository;
 import com.family.buymaterials.adapter.router.repository.ProductRepository;
 import com.family.buymaterials.domain.repository.h2.model.Product;
-import com.family.buymaterials.domain.repository.h2.model.ProductDetail;
 import com.family.buymaterials.domain.service.ProductServiceInterface;
 import com.family.buymaterials.domain.service.model.ProductDTO;
-import com.family.buymaterials.domain.service.model.ProductDetailDTO;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class ProductServiceImpl implements ProductServiceInterface {
@@ -35,6 +32,18 @@ public class ProductServiceImpl implements ProductServiceInterface {
     public List<ProductDTO> findAllProducts() {
         List<ProductDTO> list = new ArrayList<>();
         List<Product> listProduct = productRepository.findAll();
+        if (!listProduct.isEmpty()) {
+            list = objectMapper.convertValue(listProduct,
+                    new TypeReference<List<ProductDTO>>() {
+                    });
+        }
+        return list;
+    }
+
+    @Override
+    public List<ProductDTO> likeNameProduct(String name) {
+        List<ProductDTO> list = new ArrayList<>();
+        List<Product> listProduct = productRepository.findByDescriptionContains(name);
         if (!listProduct.isEmpty()) {
             list = objectMapper.convertValue(listProduct,
                     new TypeReference<List<ProductDTO>>() {
@@ -77,9 +86,9 @@ public class ProductServiceImpl implements ProductServiceInterface {
     public String deleteProduct(Long id) {
         if (productRepository.findById(id).isPresent()) {
             productRepository.deleteById(id);
-            return "Producte eliminado correctamente.";
+            return "1";
         }
-        return "Error! El Producte no existe";
+        return "0";
     }
 
     @Override
@@ -89,8 +98,8 @@ public class ProductServiceImpl implements ProductServiceInterface {
             Product product = objectMapper.convertValue(productUpdate, new TypeReference<Product>() {
             });
             productRepository.save(product);
-            return "Producte modificado";
+            return "1";
         }
-        return "Error al modificar el Producte";
+        return "0";
     }
 }

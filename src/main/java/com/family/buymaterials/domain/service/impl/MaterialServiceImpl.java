@@ -38,6 +38,18 @@ public class MaterialServiceImpl implements MaterialServiceInterface {
     }
 
     @Override
+    public List<MaterialDTO> likeNameMaterial(String name) {
+        List<MaterialDTO> list = new ArrayList<>();
+        List<Material> listMaterial = materialRepository.findByDescriptionContains(name);
+        if (!listMaterial.isEmpty()) {
+            list = objectMapper.convertValue(listMaterial,
+                    new TypeReference<List<MaterialDTO>>() {
+                    });
+        }
+        return list;
+    }
+
+    @Override
     public MaterialDTO findMaterialById(Long id) {
         Optional<Material> material = materialRepository.findById(id);
         MaterialDTO materialDTO = null;
@@ -64,9 +76,9 @@ public class MaterialServiceImpl implements MaterialServiceInterface {
     public String deleteMaterial(Long id) {
         if (materialRepository.findById(id).isPresent()) {
             materialRepository.deleteById(id);
-            return "Materiale eliminado correctamente.";
+            return "1";
         }
-        return "Error! El Materiale no existe";
+        return "0";
     }
 
     @Override
@@ -76,8 +88,8 @@ public class MaterialServiceImpl implements MaterialServiceInterface {
             Material material = objectMapper.convertValue(materialUpdate, new TypeReference<Material>() {
             });
             materialRepository.save(material);
-            return "Materiale modificado";
+            return "1";
         }
-        return "Error al modificar el Materiale";
+        return "0";
     }
 }

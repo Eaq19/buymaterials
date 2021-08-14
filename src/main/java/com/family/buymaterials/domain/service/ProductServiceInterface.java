@@ -3,11 +3,12 @@ package com.family.buymaterials.domain.service;
 import com.family.buymaterials.domain.service.model.ProductDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ProductServiceInterface {
 
     List<ProductDTO> findAllProducts();
+
+    List<ProductDTO> likeNameProduct(String name);
 
     ProductDTO findProductById(Long id);
 

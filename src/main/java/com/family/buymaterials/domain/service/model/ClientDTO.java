@@ -21,7 +21,7 @@ public class ClientDTO {
     private String documentType;
     private String name;
     private DepartamentDTO clientDepartament;
-    private City clientCity;
+    private CityDTO clientCity;
     private String address;
     private String phoneNumber;
     private String picture;
